@@ -20,6 +20,7 @@ const CreactTaems = (props) => {
       (res) => {
         console.log(res);
         if (res?.status) {
+          props.getAllMatch();
           props.setShowForm(false);
           setmatchdata({
             seriesName: "",

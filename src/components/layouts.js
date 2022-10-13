@@ -26,6 +26,12 @@ const menuItems = [
     activeIcon: "/home.png",
   },
   {
+    href: "/team",
+    title: "Team",
+    icon: "/security.png",
+    activeIcon: "/security1.png",
+  },
+  {
     href: "/predictions",
     title: "Predictions",
     icon: "/home1.png",
@@ -44,6 +50,12 @@ const menuItems = [
     icon: "/security.png",
     activeIcon: "/security1.png",
   },
+  // {
+  //   href: "/team",
+  //   title: "Team",
+  //   icon: "/security.png",
+  //   activeIcon: "/security1.png",
+  // },
   // {
   //   href: "/termsConditions",
   //   title: "Terms Conditions",
@@ -107,7 +119,7 @@ const Layout = ({ children }) => {
                 toggleDrawer ? "hidden md:flex" : "flex"
               }`}
             >
-              <div className="mx-2 cursor-pointer ">
+              {/* <div className="mx-2 cursor-pointer ">
                 <Image
                   src="/notification1.png"
                   width="15"
@@ -115,7 +127,7 @@ const Layout = ({ children }) => {
                   alt="icon"
                   layout="fixed"
                 ></Image>
-              </div>
+              </div> */}
               <div className="flex-1 flex justify-center item-center cursor-pointer ">
                 <div className="mx-2 border-r-2 border-red-900 px-2">
                   <Image

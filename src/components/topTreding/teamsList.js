@@ -24,10 +24,10 @@ const TeamsList = (props) => {
         Header: "Start Date",
         accessor: "startDate",
       },
-      {
-        Header: "End Date",
-        accessor: "endDate",
-      },
+      // {
+      //   Header: "End Date",
+      //   accessor: "endDate",
+      // },
       {
         Header: "Location",
         accessor: "location",

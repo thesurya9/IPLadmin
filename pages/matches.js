@@ -4,17 +4,11 @@ import CreactTaems from "../src/components/topTreding/creactTaems";
 import TeamsList from "../src/components/topTreding/teamsList";
 import { Api } from "../src/services/service";
 import { useRouter } from "next/router";
+import moment from "moment/moment";
 
 const Matches = (props) => {
   const router = useRouter();
-  const [teamsList, setTeamsList] = useState([
-    {
-      series_name: "abcd",
-      start_date: "12/9/2022",
-      end_date: "20/9/2022",
-      location: "Australia",
-    },
-  ]);
+  const [teamsList, setTeamsList] = useState([]);
 
   const [showForm, setShowForm] = useState(false);
 
@@ -29,6 +23,9 @@ const Matches = (props) => {
       (res) => {
         console.log(res);
         if (res?.status) {
+          res.data.matchList.forEach((element) => {
+            element.startDate = moment(element.startDate).format("DD-MM-YYYY");
+          });
           setTeamsList(res.data.matchList);
         }
         props.loader(false);
@@ -43,17 +40,24 @@ const Matches = (props) => {
   return (
     <div className=" min-h-screen bg-black md:-mt-16 overflow-x-auto">
       {showForm && (
-        <CreactTaems setShowForm={setShowForm} title="Matches" {...props} />
+        <CreactTaems
+          setShowForm={setShowForm}
+          title="Matches"
+          {...props}
+          getAllMatch={getAllMatch}
+        />
       )}
       <div className="pt-20 pb-5 px-5">
-        <button
-          className="bg-red-700 text-white rounded p-1.5 mt-1 ml-5 px-5"
-          onClick={() => {
-            setShowForm(true);
-          }}
-        >
-          Add Match
-        </button>
+        {!showForm && (
+          <button
+            className="bg-red-700 text-white rounded p-1.5 mt-1 ml-5 px-5"
+            onClick={() => {
+              setShowForm(true);
+            }}
+          >
+            Add Match
+          </button>
+        )}
         <div className="p-5 mt">
           <div className="grid grid-cols-2 bg-stone-900 md:px-5 p-3 rounded-sm  border-t-4 border-red-700 ">
             <div>

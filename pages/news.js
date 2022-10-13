@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Api } from "../src/services/service";
 import { useRouter } from "next/router";
 import NewsTable from "../src/components/news/newstable";
+import moment from "moment/moment";
 
 const News = (props) => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const News = (props) => {
       (res) => {
         console.log(res);
         if (res?.status) {
+          getAllNews();
           setShowForm(false);
           setnewsdata({
             title: "",
@@ -44,6 +46,9 @@ const News = (props) => {
       (res) => {
         console.log(res);
         if (res?.status) {
+          res.data.newsList.forEach((element) => {
+            element.date = moment(element.date).format("DD-MM-YYYY");
+          });
           setTableList(res.data.newsList);
         }
         props.loader(false);
@@ -129,14 +134,16 @@ const News = (props) => {
             </div>
           </div>
         )}
-        <button
-          className="bg-red-700 text-white rounded p-1.5 mt-1 ml-5 px-5"
-          onClick={() => {
-            setShowForm(true);
-          }}
-        >
-          Add News
-        </button>
+        {!showForm && (
+          <button
+            className="bg-red-700 text-white rounded p-1.5 mt-1 ml-5 px-5"
+            onClick={() => {
+              setShowForm(true);
+            }}
+          >
+            Add News
+          </button>
+        )}
         <div className="p-5 mt">
           <div className="grid grid-cols-2 bg-stone-900 md:px-5 p-3 rounded-sm  border-t-4 border-red-700 ">
             <div>
