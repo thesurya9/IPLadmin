@@ -14,7 +14,6 @@ const TermsConditions = () => {
         <div className=" border-2 border-red-700 rounded-sm p-5">
           <div>
             <input
-              value={PrivacyPolicydata}
               onChange={(text) => {}}
               placeholder="Enter Terms & Conditions"
               className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 w-full"
