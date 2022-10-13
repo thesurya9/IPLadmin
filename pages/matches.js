@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import CreactTaems from "../src/components/topTreding/creactTaems";
 import TeamsList from "../src/components/topTreding/teamsList";
