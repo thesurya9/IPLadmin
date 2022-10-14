@@ -150,7 +150,7 @@ const Layout = ({ children }) => {
         <aside className={`bg-stone-800 w-60 fixed z-100 min-h-screen `}>
           <div className="py-3 w-full justify-center text-center border-b-2 border-black">
             <Image
-              src="/logo.png"
+              src="/logo1.png"
               width="100"
               height="130"
               alt="icon"

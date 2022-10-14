@@ -1,16 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Api } from "../src/services/service";
+import {
+  checkForEmptyKeys,
+  checkEmail,
+} from "../src/services/InputsNullChecker";
 
 const Team = (props) => {
   const router = useRouter();
   const [teamList, setTeamList] = useState([]);
 
-  const [teamdata, setteamdata] = useState({});
+  const [teamdata, setteamdata] = useState({
+    id: "",
+    file: "",
+  });
 
   useEffect(() => {
     getAllMatch();
   }, []);
+
+  const createTeam = () => {
+    console.log(teamdata);
+
+    let { anyEmptyInputs, errorString } = checkForEmptyKeys(teamdata);
+    console.log(errorString);
+    if (anyEmptyInputs.length > 0) {
+      props.toaster({ type: "error", message: errorString });
+      return;
+    }
+
+    const data = new FormData();
+    data.append("id", teamdata.id);
+    data.append("file", teamdata.file);
+
+    Api("post", "jobs/uploadTeam", data, router).then(
+      (res) => {
+        console.log(res);
+        if (res?.status) {
+          setteamdata({
+            id: "",
+            file: "",
+          });
+        }
+        props.loader(false);
+      },
+      (err) => {
+        console.log(err);
+        props.loader(false);
+      }
+    );
+  };
 
   const getAllMatch = () => {
     const userDetail = JSON.parse(localStorage.getItem("userDetail"));
@@ -51,6 +90,7 @@ const Team = (props) => {
               }}
               className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 w-52"
             >
+              <option value="">Select match</option>
               {teamList.map((match) => (
                 <option key={match._id} value={match._id}>
                   {match.teamA} vs {match.teamB}
@@ -62,8 +102,9 @@ const Team = (props) => {
               Upload Photo
             </p>
             <input
-              onChange={(text) => {
-                // setformdata({ ...formdata, prediction: text.target.value });
+              onChange={(e) => {
+                console.log(e.target.files[0]);
+                setteamdata({ ...teamdata, file: e.target.files[0] });
               }}
               type="file"
               className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 w-full"
@@ -72,7 +113,7 @@ const Team = (props) => {
               <button
                 className="text-white bg-red-700 rounded-sm  text-md py-21 w-32 h-10"
                 onClick={() => {
-                  createPredictions();
+                  createTeam();
                 }}
               >
                 Save

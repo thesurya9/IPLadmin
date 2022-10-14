@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Api } from "../src/services/service";
 import { useRouter } from "next/router";
+import {
+  checkForEmptyKeys,
+  checkEmail,
+} from "../src/services/InputsNullChecker";
 
 const PrivacyPolicy = (props) => {
   const router = useRouter();
@@ -11,6 +15,15 @@ const PrivacyPolicy = (props) => {
   });
 
   const createPrivacyPolicy = () => {
+    console.log(PrivacyPolicydata);
+
+    let { anyEmptyInputs, errorString } = checkForEmptyKeys(PrivacyPolicydata);
+    console.log(errorString);
+    if (anyEmptyInputs.length > 0) {
+      props.toaster({ type: "error", message: errorString });
+      return;
+    }
+
     props.loader(true);
     console.log(PrivacyPolicydata);
     Api("post", "jobs/saveOtherInfo", PrivacyPolicydata, router).then(

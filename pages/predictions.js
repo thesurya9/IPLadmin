@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Api } from "../src/services/service";
+import {
+  checkForEmptyKeys,
+  checkEmail,
+} from "../src/services/InputsNullChecker";
 
 const Predictions = (props) => {
   const router = useRouter();
@@ -13,6 +17,15 @@ const Predictions = (props) => {
   });
 
   const createPredictions = () => {
+    console.log(formdata);
+
+    let { anyEmptyInputs, errorString } = checkForEmptyKeys(formdata);
+    console.log(errorString);
+    if (anyEmptyInputs.length > 0) {
+      props.toaster({ type: "error", message: errorString });
+      return;
+    }
+
     props.loader(true);
     console.log(formdata);
     Api("post", "jobs/prediction", formdata, router).then(
@@ -70,6 +83,7 @@ const Predictions = (props) => {
               }}
               className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 w-52"
             >
+              <option value="">Select match</option>
               {teamsList.map((match) => (
                 <option key={match._id} value={match._id}>
                   {match.teamA} vs {match.teamB}

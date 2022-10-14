@@ -4,6 +4,10 @@ import { Api } from "../src/services/service";
 import { useRouter } from "next/router";
 import NewsTable from "../src/components/news/newstable";
 import moment from "moment/moment";
+import {
+  checkForEmptyKeys,
+  checkEmail,
+} from "../src/services/InputsNullChecker";
 
 const News = (props) => {
   const router = useRouter();
@@ -16,6 +20,15 @@ const News = (props) => {
   }, []);
 
   const createNews = () => {
+    console.log(newsdata);
+
+    let { anyEmptyInputs, errorString } = checkForEmptyKeys(newsdata);
+    console.log(errorString);
+    if (anyEmptyInputs.length > 0) {
+      props.toaster({ type: "error", message: errorString });
+      return;
+    }
+
     props.loader(true);
     console.log(newsdata);
     Api("post", "jobs/saveNews", newsdata, router).then(

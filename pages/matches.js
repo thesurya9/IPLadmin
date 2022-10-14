@@ -9,12 +9,19 @@ import moment from "moment/moment";
 const Matches = (props) => {
   const router = useRouter();
   const [teamsList, setTeamsList] = useState([]);
-
+  const [sigleData, setSigleData] = useState({});
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     getAllMatch();
   }, []);
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const getAllMatch = () => {
     const userDetail = JSON.parse(localStorage.getItem("userDetail"));
@@ -45,6 +52,8 @@ const Matches = (props) => {
           title="Matches"
           {...props}
           getAllMatch={getAllMatch}
+          sigleData={sigleData}
+          setSigleData={setSigleData}
         />
       )}
       <div className="pt-20 pb-5 px-5">
@@ -66,7 +75,12 @@ const Matches = (props) => {
               </p>
             </div>
           </div>
-          <TeamsList data={teamsList} />
+          <TeamsList
+            data={teamsList}
+            setSigleData={setSigleData}
+            setShowForm={setShowForm}
+            goToTop={goToTop}
+          />
         </div>
       </div>
     </div>
