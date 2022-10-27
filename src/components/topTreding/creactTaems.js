@@ -11,6 +11,8 @@ const CreactTaems = (props) => {
     seriesName: "",
     teamA: "",
     teamB: "",
+    teamAimg: "",
+    teamBimg: "",
     startDate: "",
     endDate: "",
     location: "",
@@ -60,6 +62,8 @@ const CreactTaems = (props) => {
             seriesName: "",
             teamA: "",
             teamB: "",
+            teamAimg: "",
+            teamBimg: "",
             startDate: "",
             endDate: "",
             location: "",
@@ -209,6 +213,38 @@ const CreactTaems = (props) => {
                 onChange={(text) => {
                   console.log(text);
                   setmatchdata({ ...matchdata, teamB: text.target.value });
+                }}
+                className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 "
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 grid-cols-1 items-start">
+            <div className="grid grid-cols-1 md:mr-2">
+              <p className="text-white text-lg font-semibold mt-1">
+                Team A Flag
+              </p>
+              <input
+                value={matchdata.teamAimg}
+                placeholder="Enter Team A flag url link"
+                onChange={(text) => {
+                  console.log(text);
+                  setmatchdata({ ...matchdata, teamAimg: text.target.value });
+                }}
+                className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 "
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:mr-2">
+              <p className="text-white text-lg font-semibold mt-1">
+                Team B Flag
+              </p>
+              <input
+                value={matchdata.teamBimg}
+                placeholder="Enter Team B flag url link"
+                onChange={(text) => {
+                  console.log(text);
+                  setmatchdata({ ...matchdata, teamBimg: text.target.value });
                 }}
                 className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 "
               />

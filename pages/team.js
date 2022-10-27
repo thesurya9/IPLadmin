@@ -13,7 +13,7 @@ const Team = (props) => {
   const [teamdata, setteamdata] = useState({
     id: "",
     file: "",
-  });
+  }); 
 
   useEffect(() => {
     getAllMatch();

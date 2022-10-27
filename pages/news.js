@@ -31,7 +31,14 @@ const News = (props) => {
 
     props.loader(true);
     console.log(newsdata);
-    Api("post", "jobs/saveNews", newsdata, router).then(
+    const data = new FormData();
+    data.append("title", newsdata?.title || "");
+    data.append("location", newsdata?.location || "");
+    data.append("date", newsdata?.date || "");
+    data.append("news", newsdata?.news || "");
+    data.append("file", newsdata?.file || "");
+
+    Api("post", "jobs/saveNewsWithImg", data, router).then(
       (res) => {
         console.log(res);
         if (res?.status) {
@@ -84,7 +91,7 @@ const News = (props) => {
               </div>
             </div>
             <div className=" border-2 border-red-700 rounded-sm p-5">
-              <div className="grid md:grid-cols-3 grid-cols-1 items-start">
+              <div className="grid md:grid-cols-2 grid-cols-1 items-start">
                 <div className="grid grid-cols-1 md:mr-2">
                   <p className="text-white text-lg font-semibold mt-1">Title</p>
                   <input
@@ -109,6 +116,8 @@ const News = (props) => {
                     className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 "
                   />
                 </div>
+              </div>
+              <div className="grid md:grid-cols-2 grid-cols-1 items-start">
                 <div className="grid grid-cols-1 md:mr-2">
                   <p className="text-white text-lg font-semibold mt-1">
                     Location
@@ -119,6 +128,20 @@ const News = (props) => {
                     onChange={(text) => {
                       console.log(text);
                       setnewsdata({ ...newsdata, location: text.target.value });
+                    }}
+                    className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 "
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:mr-2">
+                  <p className="text-white text-lg font-semibold mt-1">
+                    Upload image{" "}
+                  </p>
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      console.log(e.target.files[0]);
+                      setnewsdata({ ...newsdata, file: e.target.files[0] });
                     }}
                     className="rounded-md border-2 border-red-900 mt-1 outline-none text-white bg-black p-1.5 "
                   />

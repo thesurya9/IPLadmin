@@ -31,6 +31,10 @@ export default function Home(props) {
       },
       (err) => {
         console.log(err);
+        props.toaster({
+          type: "error",
+          message: err.message,
+        });
         props.loader(false);
       }
     );
