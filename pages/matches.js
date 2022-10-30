@@ -44,6 +44,27 @@ const Matches = (props) => {
     );
   };
 
+  const deleteMatch = (id) => {
+    props.loader(true);
+    Api("post", "jobs/deleteOneMatch", { id }, router).then(
+      (res) => {
+        console.log(res);
+        if (res?.status) {
+          props.toaster({
+            type: "success",
+            message: "Match deleted successfully",
+          });
+          getAllMatch();
+        }
+        props.loader(false);
+      },
+      (err) => {
+        console.log(err);
+        props.loader(false);
+      }
+    );
+  };
+
   return (
     <div className=" min-h-screen bg-black md:-mt-16 overflow-x-auto">
       {showForm && (
@@ -79,6 +100,7 @@ const Matches = (props) => {
             data={teamsList}
             setSigleData={setSigleData}
             setShowForm={setShowForm}
+            deleteMatch={deleteMatch}
             goToTop={goToTop}
           />
         </div>

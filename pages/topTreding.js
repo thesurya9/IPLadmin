@@ -3,14 +3,7 @@ import CreactTaems from "../src/components/topTreding/creactTaems";
 import TeamsList from "../src/components/topTreding/teamsList";
 
 const TopTreding = () => {
-  const [teamsList, setTeamsList] = useState([
-    {
-      series_name: "abcd",
-      start_date: "12/9/2022",
-      end_date: "20/9/2022",
-      location: "Australia",
-    },
-  ]);
+  const [teamsList, setTeamsList] = useState([]);
 
   const [showForm, setShowForm] = useState(false);
 

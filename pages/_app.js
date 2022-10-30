@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Layout>
       <Loader open={open} />
-      <div className="absolute right-5 top-20 min-w-max">
+      <div className="fixed right-5 top-20 min-w-max">
         {!!toast.message && (
           <Toaster type={toast.type} message={toast.message} />
         )}

@@ -49,7 +49,7 @@ const TeamsList = (props) => {
           <IoEyeSharp className="text-red-700 h-4 w-4 " />
         </div> */}
         <div
-          className="h-7 w-9 bg-red-700 rounded-sm ml-2 flex justify-center items-center"
+          className="h-7 w-9 bg-red-700 rounded-sm ml-2 flex justify-center items-center cursor-pointer"
           onClick={() => {
             props.setSigleData(row.original);
             props.setShowForm(true);
@@ -57,6 +57,14 @@ const TeamsList = (props) => {
           }}
         >
           Edit
+        </div>
+        <div
+          className="h-7 px-2 bg-red-700 rounded-sm ml-2 flex justify-center items-center cursor-pointer"
+          onClick={() => {
+            props.deleteMatch(row.original._id);
+          }}
+        >
+          Delete
         </div>
       </div>
     );

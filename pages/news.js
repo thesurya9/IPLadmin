@@ -80,6 +80,27 @@ const News = (props) => {
     );
   };
 
+  const deleteNews = (id) => {
+    props.loader(true);
+    Api("post", "jobs/deleteOneNews", { id }, router).then(
+      (res) => {
+        console.log(res);
+        if (res?.status) {
+          props.toaster({
+            type: "success",
+            message: "News deleted successfully",
+          });
+          getAllNews();
+        }
+        props.loader(false);
+      },
+      (err) => {
+        console.log(err);
+        props.loader(false);
+      }
+    );
+  };
+
   return (
     <div className=" min-h-screen bg-black md:-mt-16 overflow-x-auto">
       <div className="pt-20 pb-5 px-5">
@@ -188,7 +209,7 @@ const News = (props) => {
               </p>
             </div>
           </div>
-          <NewsTable data={tableList} />
+          <NewsTable data={tableList} deleteNews={deleteNews} />
         </div>
       </div>
     </div>
