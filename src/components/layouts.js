@@ -13,12 +13,12 @@ import dynamic from "next/dynamic";
 import * as rdd from "react-device-detect";
 
 const menuItems = [
-  // {
-  //   href: "/topTreding",
-  //   title: "Top Treding Series",
-  //   icon: "/home1.png",
-  //   activeIcon: "/home.png",
-  // },
+  {
+    href: "/topTreding",
+    title: "Top Treding Series",
+    icon: "/home1.png",
+    activeIcon: "/home.png",
+  },
   {
     href: "/matches",
     title: "Matches",
