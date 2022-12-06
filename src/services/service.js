@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ConstantsUrl = "https://iplbackend99.herokuapp.com/v1/api/";
+const ConstantsUrl = "https://iplbackned.onrender.com/v1/api/";
 
 function Api(method, url, data, router) {
   return new Promise(function (resolve, reject) {

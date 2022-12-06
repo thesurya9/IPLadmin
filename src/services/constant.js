@@ -1,6 +1,6 @@
-const prodUrl = "https://api.lifology.com";
+const prodUrl = "https://iplbackned.onrender.com/v1/api/";
 const devUrl = "https://iplbackend99.herokuapp.com/v1/api/";
-let apiUrl = devUrl;
+let apiUrl = prodUrl;
 
 // const user = !!localStorage
 //   ? JSON.parse(localStorage.getItem("userDetail"))
